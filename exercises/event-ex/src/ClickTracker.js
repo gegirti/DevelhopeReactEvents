@@ -1,15 +1,11 @@
 import React from "react";
 
 export class ClickTracker extends React.Component {
-  state = { altKey: this.props.altKey };
+  state = { lastKey: this.props.lastKey };
 
   handleTracker = (event) => {
     console.log(event);
-    this.setState((state) => {
-      return {
-        state: state.altKey,
-      };
-    });
+    this.setState({ lastKey: event.target.innerHTML });
   };
 
   render() {
@@ -18,11 +14,11 @@ export class ClickTracker extends React.Component {
         <button onClick={this.handleTracker}>Button 1</button>
         <button onClick={this.handleTracker}>Button 2</button>
         <button onClick={this.handleTracker}>Button 3</button>
-        <h1>Last Pressed Button: {this.handleTracker.altKey}</h1>
+        <h1>Last Pressed Button: {this.state.lastKey}</h1>
       </div>
     );
   }
 }
 ClickTracker.defaultProps = {
-  altKey: false,
+  lastKey: false,
 };
